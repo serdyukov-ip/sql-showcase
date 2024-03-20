@@ -46,7 +46,7 @@ docker exec -it my-postgres bash
 ```dockerfile
 psql -U postgres -d sql-showcase
 ```
-Теперь вы можете выполнять SQL-запросы к базе данных из terminal/cmd:. Например:
+Теперь вы можете выполнять SQL-запросы к базе данных из terminal/cmd. Например:
 ```dockerfile
 SELECT * FROM EMPLOYEES;
 ```
