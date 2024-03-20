@@ -1336,3 +1336,66 @@ VALUES
 (404,32,4,135,84,2295,11.6,1982),
 (405,28,4,120,79,2625,18.6,1982),
 (406,31,4,119,82,2720,19.4,1982);
+
+CREATE TABLE ORDERS (
+    order_id INT,
+    status_date DATE,
+    status VARCHAR(20)
+);
+
+insert into ORDERS values 
+(11700, date '2016-01-03', 'New'),
+(11700, date '2016-01-04', 'Inventory Check'),
+(11700, date '2016-01-05', 'Inventory Check'),
+(11700, date '2016-01-06', 'Inventory Check'),
+(11700, date '2016-01-07', 'Inventory Check'),
+(11700, date '2016-01-08', 'Inventory Check'),
+(11700, date '2016-01-09', 'Awaiting Signoff'),
+(11700, date '2016-01-10', 'Awaiting Signoff'),
+(11700, date '2016-01-11', 'Awaiting Signoff'),
+(11700, date '2016-01-12', 'In Warehouse'),
+(11700, date '2016-01-13', 'In Warehouse'),
+(11700, date '2016-01-14', 'In Warehouse'),
+(11700, date '2016-01-15', 'Awaiting Signoff'),
+(11700, date '2016-01-16', 'Awaiting Signoff'),
+(11700, date '2016-01-17', 'Payment Pending'),
+(11700, date '2016-01-18', 'Payment Pending'),
+(11700, date '2016-01-19', 'Awaiting Signoff'),
+(11700, date '2016-01-20', 'Awaiting Signoff'),
+(11700, date '2016-01-21', 'Delivery'),
+(11700, date '2016-01-22', 'Delivery');
+
+CREATE TABLE people (
+   name VARCHAR(100),
+   age INTEGER,
+   height INTEGER
+);
+
+INSERT INTO people VALUES ('Polly', 18, 10);
+INSERT INTO people VALUES ('Molly', 25, 60);
+INSERT INTO people VALUES ('Golly', 30, 60);
+
+-- Функция будет отрабатывать при использовании триггера
+CREATE OR REPLACE FUNCTION show_trigger_event()
+RETURNS TRIGGER AS $$
+BEGIN
+   RAISE NOTICE '%',
+   CASE
+      WHEN TG_OP = 'UPDATE' THEN 'UPDATE'
+      WHEN TG_OP = 'INSERT' THEN 'INSERT'
+      WHEN TG_OP = 'DELETE' THEN 'DELETE'
+      ELSE 'Procedure not executed from DML trigger!'
+   END;
+   RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- триггер отработает при добавлении/удалении записей из people
+CREATE TRIGGER employee_changes_after
+AFTER INSERT OR UPDATE ON people
+FOR EACH ROW EXECUTE FUNCTION show_trigger_event();
+
+-- триггер отработает при удалении записей из people
+CREATE TRIGGER employee_changes_before
+BEFORE DELETE ON people
+FOR EACH ROW EXECUTE FUNCTION show_trigger_event();
