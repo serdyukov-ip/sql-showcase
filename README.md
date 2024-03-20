@@ -58,7 +58,3 @@ SELECT * FROM EMPLOYEES;
 
 - Email: serdyukov-ip@yandex.ru
 - Telegram: @IlyaJavaDev
-
-## Примечания
-
-Приложение не хранит CVC/CVV код, срок действия, полный номер карты.
