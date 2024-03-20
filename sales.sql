@@ -1,3 +1,4 @@
+-- при использовании Docker образа таблица будет создана автоматически
 CREATE TABLE SALES
 (
     PRODUCT_GROUP   VARCHAR(50),
