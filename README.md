@@ -50,7 +50,7 @@ docker run -d --name my-postgres -p 5432:5432 my-postgres
 ```
 Контейнер будет доступен по параметрам host:localhost port:5432 user:postgres pass:postgres
 
-Можно подключиться к контейнеру PostgreSQL c любого удобного db клиента или последовательно выполнив команды через terminal/cmd:
+Можно подключиться к контейнеру PostgreSQL c любого удобного db клиента или последовательно выполнив команды через terminal/cmd последовательно выполнив следующие команды:
 ```dockerfile
 docker exec -it my-postgres bash
 ```
